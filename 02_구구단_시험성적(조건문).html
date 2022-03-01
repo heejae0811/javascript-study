@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>조건문 퀴즈 2번, 3번</title>
+    <script>
+        window.onload = function(){
+            // 2번 구구단
+            document.getElementById('btn_number').onclick = function(){
+                let number = document.getElementById('number').value;
+                
+                for(i = 1; i < 10; i++){
+                    let result = number * i;
+                    console.log(number + '*' + i + '=' + result);
+                }
+            }
+
+            // 3번 시험성적
+            document.getElementById('btn_score').onclick = function(){
+                let score = document.getElementById('score').value;
+                let score_result = 0;
+                
+                if(score <= 100 && score >= 90) {
+                    score_result = 'A';
+                    console.log(score_result);
+                } else if(score < 90 && score >= 80) {
+                    score_result = 'B';
+                    console.log(score_result);
+                } else if(score < 80 && score >= 70) {
+                    score_result = 'C';
+                    console.log(score_result);
+                } else if(score < 70 && score >= 60) {
+                    score_result = 'D';
+                    console.log(score_result);
+                } else if (score < 60 && score >= 0) {
+                    score_result = 'F';
+                    console.log(score_result);
+                } else {
+                    score_result = '점수를 잘못 입력했습니다.';
+                    console.log(score_result);
+                }
+            }
+        }
+    </script>
+</head>
+<body>
+    <input type="number" id="number" placeholder="구구단 숫자를 입력하시오.">
+    <button type="button" id="btn_number">확인</button>
+
+    <input type="" id="score" placeholder="시험 점수를 입력하시오.">
+    <button type="button" id="btn_score">확인</button>
+    <p id="score_result"></p>
+</body>
+</html>

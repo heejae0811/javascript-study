@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>1번</title>
+    <script>
+        let sort = 'abcdefghijklmnopqrstuvwxyz';
+        let sort_arr = sort.split('');
+
+        let str = 'baaaaaa';
+        let str_arr = str.split('');
+
+        let result_arr  = [];
+        
+        for(i = 0; i < sort_arr.length; i++){
+            for(j = 0; j < str_arr.length; j++){
+                if(sort_arr[i] === str_arr[j]) {
+                    result_arr.push(sort_arr[i]);
+                }
+            }
+        }
+
+        console.log(result_arr);
+
+        let filter_arr = result_arr.filter(function(item, index) {
+            if (result_arr.indexOf(item) !== index) {
+                return item;
+            }
+        });
+
+        console.log(filter_arr);
+    </script>
+</head>
+<body>
+
+html:5  
+
+</html>

@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>조건문 퀴즈 별 찍기</title>
+    <script>
+        window.onload = function(){
+            // 4번 별 찍기 1 레벨
+            document.getElementById('btn1').onclick = function(){
+                let number = document.getElementById('number').value;
+
+                for(i = 0; i <= number; i++) {
+                    for(j = 0; j < i; j++) {
+                        document.write('*');
+                    }
+                    document.write('<br>');
+                }
+            }
+
+            // 5번 별 찍기 2 레벨
+            document.getElementById('btn2').onclick = function(){
+                let number = document.getElementById('number').value;
+
+                for(i = 0; i < number; i++){
+                    for(j = number; j > i; j--){
+                        document.write('&nbsp');
+                    }
+                    for(k = 0; k < j; k++){
+                        document.write('*');
+                    }
+                    document.write('<br>');
+                }
+            }
+
+            // 6번 별 찍기 3 레벨
+            document.getElementById('btn3').onclick = function(){
+                let number = document.getElementById('number').value;
+
+                for(i = 0; i <= number; i++) {
+                    for(j = number; j > i; j--) {
+                        document.write('*');
+                    }
+                    document.write('<br>');
+                }
+            }
+
+            // 7번 별 찍기 4 레벨
+            document.getElementById('btn4').onclick = function(){
+                let number = document.getElementById('number').value;
+
+                for(i = 0; i < number; i++){
+                    for(j = 0; j < i; j++){
+                        document.write('&nbsp');
+                    }
+                    for(k = number; k > j; k--){
+                        document.write('*');
+                    }
+                    document.write('<br>');
+                }
+            }
+
+            // 8번 별 찍기 5 레벨
+            document.getElementById('btn5').onclick = function(){
+                let number = document.getElementById('number').value;
+
+                for(i = 0; i < number; i++){
+                    for(j = number; j > i; j--){
+                        document.write('&nbsp');
+                    }
+
+                    for(j = 0; j < i; j++){
+                        document.write('*');
+                    }
+                    
+                    for(j = 0; j < i; j++){
+                        document.write('*');
+                    }
+                    
+                    document.write('<br>');
+                }
+            }
+
+            // 9번 병 찍기 6 레벨
+            document.getElementById('btn6').onclick = function(){
+                let number = document.getElementById('number').value;
+
+                for(i = 0; i < number; i++){
+                    for(j = 0; j < i; j++){
+                        document.write('&nbsp');
+                    }
+
+                    for(j = number; j > i; j--){
+                        document.write('*');
+                    }
+
+                    for(j = number; j > i; j--){
+                        document.write('*');
+                    }
+                    
+                    document.write('<br>');
+                }
+            }
+        }
+    </script>
+</head>
+<body>
+    <input type="number" id="number" placeholder="숫자를 입력하시오.">
+    <button type="button" id="btn1">1레벨</button>
+    <button type="button" id="btn2">2레벨</button>
+    <button type="button" id="btn3">3레벨</button>
+    <button type="button" id="btn4">4레벨</button>
+    <button type="button" id="btn5">5레벨</button>
+    <button type="button" id="btn6">6레벨</button>
+</body>
+</html>

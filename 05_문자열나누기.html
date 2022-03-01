@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>2번</title>
+    <script>
+        function word_length(){
+            let input = document.getElementById('input').value;
+            let word = input.split(' ');
+
+            console.log(word);
+            console.log(word.length);
+        }
+    </script>
+</head>
+<body>
+    <input type="text" id="input" placeholder="입력하시오.">
+    <button type="button" onclick="word_length()">확인</button>
+</html>
