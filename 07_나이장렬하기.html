@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>나이순 정렬하기</title>
+    <script>
+        let members = ['3','21 Junkyu','21 Dohyun','20 Sunyoung'];
+
+        for(let i = 0; i < members.length; i++){
+            if(members[i] === '3'){
+                members.splice(i, 1);
+                i--;
+            }
+        }
+        console.log(members);
+
+        function memberSort(a, b) {
+            return parseInt(a) - parseInt(b);
+        }
+        console.log(members.sort(memberSort));
+
+        /*
+        * parseInt() 함수는 문자열 인자를 파싱하여 특정 진수의 정수를 반환한다.
+        * 이름 문자열 제외하고 앞의 나이로만 정렬하기 위해서 사용
+        */
+
+        // 문자열 정렬
+        // function memberSort(a, b) {
+        //     if (a.toLowerCase() < b.toLowerCase()) return -1;
+        //     if (a.toLowerCase() > b.toLowerCase()) return 1;
+        //     return 0;
+        // };
+    </script>
+</head>
+
+<body>
+</body>
+</html>

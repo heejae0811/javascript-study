@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>수 정렬하기</title>
+    <script>
+        let num = prompt('띄어쓰기를 이용해 숫자를 입력하시오. ex) 5 5 2 3 4 1');
+        let arr_num = num.split(' ').map(function(item){
+            return parseInt(item, 10)
+        });
+        console.log(arr_num);
+
+        function arrSort(a, b){
+            return a - b;
+        }
+        console.log(new Set(arr_num.sort(arrSort)));
+
+        /*
+        * 1. prompt 입력값이 문자열이기 때문에 map과 parseInt를 이용해 숫자 배열로 만들기
+        * 2. sort() 매서드를 이용해 정렬하기. 자바스크립트에서 sort는 문자정렬이다.
+        * 3. new Set() 매서드를 이용해 중복제거, set 객체는 원시값과 객체 참조 모두 유일한 값을 저장할 수 있다.
+        */
+    </script>
+</head>
+
+<body>
+</body>
+</html>
