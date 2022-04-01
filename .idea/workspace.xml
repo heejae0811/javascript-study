@@ -2,8 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="719444d5-f6df-4f1a-aa19-b917713b146a" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/06_숫자정렬하기.html" beforeDir="false" afterPath="$PROJECT_DIR$/06_숫자정렬하기.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/07_나이장렬하기.html" beforeDir="false" afterPath="$PROJECT_DIR$/07_나이장렬하기.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -12,6 +11,10 @@
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="HighlightingSettingsPerFile">
+    <setting file="file://$PROJECT_DIR$/07_나이장렬하기.html" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/06_숫자정렬하기.html" root0="FORCE_HIGHLIGHTING" />
   </component>
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
@@ -28,7 +31,7 @@
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="last_opened_file_path" value="D:/lotte-drink" />
     <property name="nodejs_package_manager_path" value="npm" />
     <property name="vue.rearranger.settings.migration" value="true" />
   </component>
@@ -41,7 +44,9 @@
       <option name="presentableId" value="Default" />
       <updated>1646109868756</updated>
       <workItem from="1646109869790" duration="6745000" />
-      <workItem from="1646186841067" duration="2357000" />
+      <workItem from="1646186841067" duration="2543000" />
+      <workItem from="1646214331177" duration="104000" />
+      <workItem from="1646285134362" duration="49000" />
     </task>
     <servers />
   </component>

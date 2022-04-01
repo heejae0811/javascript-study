@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>평균</title>
+    <script>
+        let subject = prompt('과목의 개수를 입력하시오.');
+        if(subject >= 1000) {
+            alert('1000 이하의 숫자를 입력하시오.');
+        }
+
+        let score = prompt('성적을 입력하시오.');
+        let arr_score = score.split(' ').map(function(item){
+            return parseInt(item, 10);
+        });
+        let max_score = Math.max.apply(null, arr_score);
+
+        let arr = new Array();
+        for(i = 0; i < subject; i++){
+            let result = arr_score[i]/max_score*100;
+            arr.push(result);
+            arr.sort((a, b) => a - b);
+        }
+        console.log(arr);
+
+        let length = Math.round(arr.length/2);
+        console.log('세준이가 조작한 점수는 ' + arr[length-1]);
+    </script>
+</head>
+
+<body>
+</body>
+</html>
