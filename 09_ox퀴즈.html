@@ -9,6 +9,11 @@
         function ox_quiz(){
             let arr = new Array();
             let num = prompt('테스트 케이스 개수를 입력하시오.');
+            let check = /^[0-9]+$/
+
+            if(!check.test(num)) {
+                return alert('숫자만 입력하시오.');
+            }
 
             for(i = 0; i < num; i++){
                 let quiz = prompt('OX 퀴즈 결과를 입력하시오.');

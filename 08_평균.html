@@ -8,9 +8,12 @@
     <script>
         function average(){
             let subject = prompt('과목의 개수를 입력하시오.');
+            let check = /^[0-9]+$/;
 
             if(subject >= 1000) {
                 return alert('1000 이하의 숫자를 입력하시오.');
+            } else if(!check.test(subject)) {
+                return alert('숫자만 입력하시오.');
             }
 
             let score = prompt('성적을 입력하시오.');
