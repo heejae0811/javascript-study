@@ -6,30 +6,39 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ox 퀴즈</title>
     <script>
-        let arr = new Array();
-        let num = prompt('테스트 케이스 개수를 입력하시오.');
+        function ox_quiz(){
+            let arr = new Array();
+            let num = prompt('테스트 케이스 개수를 입력하시오.');
+            let check = /^[0-9]+$/
 
-        for(i = 0; i < num; i++){
-            let quiz = prompt('OX 퀴즈 결과를 입력하시오.');
-            arr.push(quiz);
-            console.log(arr);
+            if(!check.test(num)) {
+                return alert('숫자만 입력하시오.');
+            }
 
-            for(j = 0; j < arr[i].length; j++){
-                let count = 0;
-                let sum = 0;
+            for(i = 0; i < num; i++){
+                let quiz = prompt('OX 퀴즈 결과를 입력하시오.');
+                arr.push(quiz);
+                console.log(arr);
 
-                arr[i].split('').forEach(function(item){
-                    if(item === 'o'){
-                        count++;
-                        sum += count;
-                    } else {
-                        count = 0;
-                    }
-                });
-                
-                console.log(sum);
+                for(j = 0; j < arr[i].length; j++){
+                    let count = 0;
+                    let sum = 0;
+
+                    arr[i].split('').forEach(function(item){
+                        if(item === 'o'){
+                            count++;
+                            sum += count;
+                        } else {
+                            count = 0;
+                        }
+                    });
+                    
+                    console.log(sum);
+                }
             }
         }
+
+        ox_quiz();
     </script>
 </head>
 
