@@ -1,4 +1,4 @@
-// process.argv를 사용하면 배열로 파라미터가 담긴다.
+// process.argv를 사용하면 파라미터가 배열에 담긴다.
 let argv = process.argv;
 let number_argv = argv.map(function(item){
     return parseInt(item, 10);
