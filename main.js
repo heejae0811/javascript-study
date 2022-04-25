@@ -1,24 +1,32 @@
-process.argv.forEach((val, index) => {
-    console.log(`${index}: ${val}`);
+// readline 사용하기
+let score = []; // 입력받은 점수
+let result = 0;
+
+let reader = require('readline').createInterface({
+    input: process.stdin,
+    output: process.stdout
 });
 
-console.log('덧셈 = ' + process.argv[2] + process.argv[4]);
+reader.on('line', (line) => {
+    score.push(line);
 
-console.log('뺼셈 = ' + process.argv[2] - process.argv[4]);
+    // -1을 입력하면 종료
+    if(line == '-1') {
+        reader.close();
+        process.exit();
+    }
+});
 
-console.log('곱셈 = ' + process.argv[2] * process.argv[4]);
+reader.on('close', () => {
+    for(i = 0; i < score.length; i++) {
+        result += parseInt(score[i], 10);
+    }
 
-console.log('나눗셈 = ' +  process.argv[2] / process.argv[4]);
+    result = result / i; // 평균 구하기
 
-console.log('나머지 = ' +  process.argv[2] % process.argv[4]);
+    console.log("결과" + result);
 
-// function add(a, b, callback){
-//     var result = a b;
-//     callback(result);
-// }
-
-// add(process.argv[2], process.argv[4], function(result){
-//     console.log('더하기 : ', result);
-// });
-
+    reader.close();
+    process.exit();
+});
 
