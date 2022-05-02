@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>자바스크립트만 가지고 html 화면과 css 적용하기</title>
+</head>
+<body>
+</body>
+
+<script>
+    const $body = document.body;
+    
+    function section1() {
+        let $ul = document.createElement('ul');
+        let $li = document.createElement('li');
+        let text = ['MDN Webdoc 표준', 'Vuejs 설치', 'Vuejs 프로젝트', '컴포넌트', '뷰의 라이프 사이클'];
+
+        $body.append($ul);
+        $body.appendChild($li);
+
+        for(i = 0; i < text.length; i++){
+            $ul.appendChild($li);
+            $li.append(text[i]);
+        }
+    }
+    
+    function section2() {
+        let $table = document.createElement('table');
+        let $th = document.createElement('th');
+        let $tr = document.createElement('tr');
+        let $td = document.createElement('td');
+
+        let people = [
+            { 'name': '정주호', 'age': 34 },
+            { 'name': '이희재', 'age': 28 },
+        ];
+
+        $body.append($table);
+        $table.append($th);
+        $table.append($tr);
+        $tr.append($td);
+
+        for(i = 0; i < people.length; i++) {
+            $td.append(people[i].name);
+            $td.append(people[i].age);
+        }
+    }
+    
+    function section3() {
+        let $button = document.createElement('button')
+        let $modal = document.createElement('div');
+        let $modal_btn = document.createElement('span');
+
+        let click = document.createTextNode('클릭');
+        let close = document.createTextNode('닫기');
+
+        $body.append($button);
+        $button.appendChild(click);
+
+        $body.append($modal);
+        $modal.append($modal_btn);
+        $modal.className = 'modal';
+        $modal_btn.appendChild(close);
+        
+        $button.addEventListener('click', function(event){
+            $modal.style.display = 'block';
+        });
+
+        $modal_btn.addEventListener('click', function(event){
+            $modal.style.display = 'none';
+        });
+    }
+
+    section1();
+    section2();
+    section3();
+</script>
+
+<style>
+.modal { display: none; position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 200px; height: 200px; border: 1px solid #ddd; background-color: #eee; }
+.modal span { display: block; margin: auto; line-height: 200px; text-align: center; cursor: pointer; }
+</style>
+
+</html>
