@@ -13,38 +13,72 @@
     const $body = document.body;
     
     function section1() {
+        let $h1 = document.createElement('h1');
         let $ul = document.createElement('ul');
-        let $li = document.createElement('li');
-        let text = ['MDN Webdoc 표준', 'Vuejs 설치', 'Vuejs 프로젝트', '컴포넌트', '뷰의 라이프 사이클'];
-
+        let arr = [
+            'Vuejs 스터디 목록',
+            'MDN Webdoc 표준과 Virtual DOM',
+            'Vuejs 설치 및 프로젝트 생성',
+            'Vuejs 프로젝트의 구성과 라우팅',
+            '컴포넌트, Props, Model',
+            'Slot, 동적 컴포넌트',
+            '뷰의 라이프 사이클',
+            'Vue의 상태관리 (1)',
+            'Vue의 상태관리 (2)',
+            'TodoList 프로젝트 리뷰',
+            'Axios를 통한 backend api 호출'
+        ];
+        
+        $body.append($h1);
+        $h1.append(arr[0]);
         $body.append($ul);
-        $body.appendChild($li);
 
-        for(i = 0; i < text.length; i++){
-            $ul.appendChild($li);
-            $li.append(text[i]);
+        for(i = 1; i < arr.length; i++){
+            let $li = document.createElement('li'); // for문 밖에 있으면 하나의 li에만 데이터를 append 하기 때문에 for문이 도는만큼 li를 만들어야 한다.
+            $li.append(arr[i]); // 데이터를 li에 append 한 다음에
+            $ul.append($li); // 그 li를 ul에 append, 순서 바꿔도 결과는 동일하지만 논리적으로..
         }
     }
     
     function section2() {
         let $table = document.createElement('table');
-        let $th = document.createElement('th');
-        let $tr = document.createElement('tr');
-        let $td = document.createElement('td');
-
         let people = [
-            { 'name': '정주호', 'age': 34 },
-            { 'name': '이희재', 'age': 28 },
+            { 'name': '정주호', 'age': 34, 'sex': '남자', 'position': '대리' },
+            { 'name': '김유빈', 'age': 32, 'sex': '여자', 'position': '대리' },
+            { 'name': '김경식', 'age': 29, 'sex': '남자', 'position': '주임' },
+            { 'name': '이희재', 'age': 28, 'sex': '여자', 'position': '주임' },
+            { 'name': '송민섭', 'age': 30, 'sex': '남자', 'position': '사원' },
+            { 'name': '김하영', 'age': 26, 'sex': '여자', 'position': '사원' },
         ];
 
         $body.append($table);
-        $table.append($th);
-        $table.append($tr);
-        $tr.append($td);
+
+        console.log(people.length);
 
         for(i = 0; i < people.length; i++) {
-            $td.append(people[i].name);
-            $td.append(people[i].age);
+            let $th = document.createElement('th');
+            $table.append($th);
+            // $th.append(people);
+
+            let $tr = document.createElement('tr');
+            $table.append($tr);
+
+            let $td1 = document.createElement('td');
+            let $td2 = document.createElement('td');
+            let $td3 = document.createElement('td');
+            let $td4 = document.createElement('td');
+
+            $td1.append(people[i].name);
+            $tr.append($td1);
+
+            $td2.append(people[i].age);
+            $tr.append($td2);
+
+            $td3.append(people[i].sex);
+            $tr.append($td3);
+
+            $td4.append(people[i].position);
+            $tr.append($td4);
         }
     }
     
