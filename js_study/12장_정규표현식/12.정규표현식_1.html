@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>정규 표현식</title>
+</head> 
+<body>
+<script>
+    // 정규 표현식 생성
+    var reg1 = new RegExp('dog'); // RegExp 생성자
+    var reg2 = /cat/; // 정규 표현식 리터럴
+
+    console.log(reg1.test('I like a dog.')); // true
+    console.log(reg1.test('I like a cat.')); // false
+
+    var result1 = reg2.exec('I like a dog.');
+    var result2 = reg2.exec('I like a cat.');
+
+    console.log(result1); // null
+    console.log(result2); // ['cat', index: 9, input: 'I like a cat.', groups: undefined]
+    console.log(result2[0]); // cat
+    console.log(result2.index); // 9
+    console.log(result2.input); // I like a cat.
+
+
+    // 문자 클래스
+    // a, p, p, l, e 중 문자 한 개와 일치한다.
+    var string1 = /[apple]/; 
+    console.log(string1.test('I like an apple.')); // true
+    console.log(string1.test('I like a banana.')); // true
+
+    // 하이픈을 사용해서 문자의 범위를 지정한다.
+    var string2 = /[a-g]/;
+    console.log(string2.test('a')); // true
+    console.log(string2.test('h')); // false
+
+    // 문자 사이에 하이픈을 사용하는게 아니라면 하이픈 문자 자체를 뜻한다. 
+    var string3 = /[-ab]/;
+    console.log(string3.test('-')); // true
+    console.log(string3.test('c')); // false
+
+    // ^ 부정 문자 클래스
+    var string4 = /[^0-9]/;
+    console.log(string4.test('10')); // false
+    console.log(string4.test('1a')); // true
+
+
+    // 문자 클래스의 단축 표기
+    // 마침표
+    var str1 = /[c.t]/;
+    console.log(str1.test('cat')); // true
+    console.log(str1.test('action')); // true
+
+    var str2 = /[c..t]/;
+    console.log(str2.test('hot and cool')); // true
+    console.log(str2.test('console')); // true
+
+    // \d, \D
+    var dateTime = /\d\d\d\d-\d\d-\d\d \d\d:\d\d/;
+    console.log(dateTime.test('2022-03-30 12:30')); // true
+    console.log(dateTime.test('2022.03.30 12시30분')); // false
+
+    // \w, \W
+    var word1 = /\w/;
+    var word2 = /\W/;
+    console.log(word1.test('This is a word.')); // true
+    console.log(word1.test('~!@#$')); // false
+    console.log(word2.test('WORD')); // false
+    console.log(word2.test('~!@#$')); // true
+
+    // \s, \S
+    var space1 = /\s/;
+    var space2 = /\S/;
+    console.log(space1.test('   ')); // true
+    console.log(space2.test('   ')); // false
+
+    // 문자 클래스 안에서의 이스케이프
+    var esc1 = /\b/; // // 문자 b
+    var esc2 = /[\b]/; // 백스페이스
+    console.log(esc1.test('bag')); // true
+    console.log(esc2.test('bag')); // false
+    
+
+    // 반복 패턴
+    var rep1 = /[a-z]{6,12}/;
+    console.log(rep1.test('abcdef')); // true
+    console.log(rep1.test('abc')); // false
+    console.log(rep1.test('abc123456')); // false
+
+    var rep2 = /[a-z]{6,}/;
+    console.log(rep2.test('abcdef')); // true
+    console.log(rep2.test('abc')); // false
+    console.log(rep2.test('abc123456')); // false
+
+    var dateTime = /\d{4}-\d{2}-\d{2} \d{2}:\d{2}/;
+    console.log(dateTime.test('2022-03-30 12:30')); // true
+    console.log(dateTime.test('2022.03.30 12시30분')); // false
+
+    var rep3 = /[a-z]{4}\d?/;
+    console.log(rep3.test('abcd')); // true
+    console.log(rep3.test('abcd123')); // true
+    console.log(rep3.test('abcd123456789')); // true
+
+    var rep4 = /\s+Tom/;
+    console.log(rep4.test('My name is Tom.')); // true
+    console.log(rep4.test('Tom')); //false
+
+    var rep5 = /[a-z]{4}\d*/; 
+    console.log(rep5.test('abcd')); // true
+    console.log(rep5.test('abcd123')); // true
+    console.log(rep5.test('abcd123456789')); // true
+    
+    var rep6 = /Java.*/;
+    var rep7 = /Java.*?/;
+    console.log(rep6.exec('I love JavaScript.')); // JavaScript
+    console.log(rep7.exec('I love JavaScript.')); // Java
+    
+
+    // 그룹화와 참조
+    var bark = /bow+(woo+f)+/;
+    console.log(bark.test('bowwoof')); // true
+    console.log(bark.test('woof')); // false
+    console.log(bark.test('bowwoofwoofwooofwooof')); // true
+
+    var header1 = /<h[1-6]>.*<\/h[1-6]>/;
+    console.log(header1.test('<h1> JavaScript </h1>]')); // true
+
+    var header2 = /<(h[1-6])>.*<\/\1>/;
+    console.log(header2.test('<h1> JavaScript </h1>]')); // true
+    console.log(header2.test('<h2> JavaScript </h2>]')); // true
+
+    var post1 = /(?:\d{3}-(?:\d{4}))/;
+    var post2 = /\d{3}-\d{4}/;
+
+    console.log(post1.test('111-2222')); // true
+    console.log(post1.test('11111-22222')); // true
+
+    console.log(post2.test('111-2222')); // true
+    console.log(post2.test('11111-22222')); // true
+
+
+    // 위치를 기준으로 매칭
+    var isFirst = /^JavaScript/;
+    console.log(isFirst.test('JavaScript is powerful.')); // true
+    console.log(isFirst.test('I love JavaScript')); // false
+
+    var isLast = /JavaScript$/;
+    console.log(isLast.test('JavaScript is powerful.')); // false
+    console.log(isLast.test('I love JavaScript')); // true
+
+    var word1 = /\scat\s/;
+    console.log(word1.test('I like a cat.')); // false
+    console.log(word1.test('cat')); // false
+    console.log(word1.test(' cat ')); // true
+
+    var word2 = /\bcat\b/;
+    console.log(word1.test('I like a cat.')); // false
+    console.log(word1.test('cat')); // false
+    console.log(word1.test(' cat ')); // true
+
+    var word3 = /\Bdog/;
+    console.log(word3.test('I like a dog.')); // false
+    console.log(word3.test('I like a bulldog.')); // true
+
+    var pattern1 = /Java(?=Script)/;
+    console.log(pattern1.test('I like JavaScript.')); // true
+    console.log(pattern1.test('I like JavaCoffee')); // false
+    console.log(pattern1.exec('I like JavaScript.')); // Java
+    console.log(pattern1.exec('I like JavaCoffee')); // null
+
+    var pattern2 = /Java(?!Script)/;
+    console.log(pattern2.test('I like JavaScript.')); // false
+    console.log(pattern2.test('I like JavaCoffee')); // true
+    console.log(pattern2.exec('I like JavaScript.')); // null
+    console.log(pattern2.exec('I like JavaCoffee')); // Java
+    
+
+    // 선택 패턴
+    var fruits = /apple|peach|orange/;
+    console.log(fruits.test('2 apples')); // true
+    console.log(fruits.test('pea')); // false
+    
+
+    // 플래그
+    var reg1 = new RegExp('abc', 'g');
+    var reg2 = /abc/g;
+    var reg3 = /abc/gi;
+    console.log(reg3.flags); // gi
+
+    var i = /\bcat\b/i;
+    console.log(i.test('I like a CAT.')); // true
+
+    var m1 = /^cat/im;
+    console.log(m1.test('Dog\nCat\nMonkey')); // true
+
+    var m2 = /at$/im;
+    console.log(m1.test('Dog\nCat\nMonkey')); // true
+</script>
+</body>
+</html>

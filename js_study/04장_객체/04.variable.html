@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>전역변수, 지역변수</title>
+</head> 
+<body>
+    <script>
+        var a = "global"; // 전역변수
+
+        function f() {
+            console.log(b); // undefined, 함수 중간 부분에 변수를 선언하더라도 자바스크립트 엔진은 함수 안의 변수 선언부를 함수의 첫머리로 끌어올린다.
+
+            // 지역변수
+            var a = "local1"
+            var b = "local2";
+            c = "local3" // 변수를 선언하지 않은 상태에서 값을 대입하면 전역변수로 선언된다.
+
+            console.log(a); // local1, 전역변수 이름과 지역변수 이름이 같아지면 두 변수가 충돌해 전역변수는 숨겨지고 지역변수를 사용하게 된다.
+            console.log(b); // local2
+            console.log(c); // local3
+
+            return b;
+        }
+
+        f();
+        console.log(a); // global
+        //console.log(b); // 참조 오류: not defined
+        console.log(c); // local3
+
+        
+        // let의 유효 범위는 블록 안이다.
+        let x = "outer x";
+        {
+            let x = "inner x";
+            let y = "inner y";
+            console.log(x); // inner x
+            console.log(y); // inner y
+        }
+        console.log(x); // outer x
+        //console.log(y); // 참조 오류: not defined
+
+        //let x = "same variable"; // 문법 오류: already been declared, 똑같은 이름을 가진 변수를 선언하면 문법 오류가 발생한다.
+
+
+        // const의 유효 범위는 블록 안이며, 한 번만 할당할 수 있다.
+        const con = 2;
+        //con = 5; // 타입 오류: before initialization, 다시 대입을 시도하면 타입 오류가 발생한다.
+
+        const origin = {x: 1, y: 2}; // const 문으로 선언한 상수값은 수정할 수 없지만, 객체나 배열의 경우에는 프로퍼티 값을 수정할 수 있다.
+        origin.x = 3;
+        console.log(origin); // {x: 3, y: 2}
+
+
+        // 함수 리터럴
+        //console.log(square(3)); // 타입 오류: Uncaught TypeError, 함수 리터럴로 정의한 함수는 끌어올리지 않는다.
+
+        var square = function(x) { 
+            return x * x;
+        }; // 함수 리터럴을 사용할 때는 반드시 세미콜론을 붙여야 한다.
+
+        console.log(square(3)); // 9
+        
+
+        // 메서드: 객체의 프로퍼티 중에서 함수 객체의 참조를 값으로 담고 있는 프로퍼티(프로퍼티에 저장된 값이 함수)
+        var circle = {
+            center: {x: 1, y: 2},
+            radius: 2.5,
+            // 원의 넓이를 구하는 메서드
+            area: function() { 
+                return Math.PI * this.radius * this.radius;
+            },
+            translate: function(a, b) {
+                this.center.x = this.center.x + a;
+                this.center.y = this.center.y + b;
+            }
+        }
+
+        console.log(circle.area()); // 19.634954084936208
+
+        // 일반적으로 메서드가 속한 객체의 내부 데이터(프로퍼티 값)를 바꾸는 용도로 사용한다.
+        circle.translate(1, 2);
+        console.log(circle.center); // {x: 2, y: 4}
+    </script>
+</body>
+</html>

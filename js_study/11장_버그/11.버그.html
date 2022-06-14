@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>버그</title>
+</head>
+<body>
+<script>
+    function f(x){
+        // 'use strict';
+        y = x;
+    }
+    f(2); // y is not defined
+
+    
+    // permutation 함수는 인수로 받기로 약속한 배열이 전달되지 않았을 때 예외를 던진다.
+    function permutation(a){
+        // instanceof는 특정 객체의 프로토타입 체인에 특정 생성자의 프로토타입 객체가 포함되어 있는지 판정한다.
+        if((a instanceof Array)){
+            throw new Error(a + ' is not an array');
+        }
+    }
+    permutation('abc'); // abc is not an array
+
+
+    /*
+    x++; // ReferenceError
+
+    if(a>0){
+        a++; // SyntaxError
+    
+    var obj = {};
+    obj.join(); // TypeError
+
+    var pi = 3.14159;
+    pi.toFixed(1000); // RangeError
+
+    decodeURLComponent('%'); // ReferenceError, URLError가 아님
+    */
+
+    
+    try {
+        var p = permutation(a);
+        p.forEach(function(v){
+            console.log(v);
+        });
+    } catch(e) {
+        if(e instanceof TypeError) {
+            alert('TypeError');
+        } else if (e instanceof ReferenceError) {
+            alert('ReferenceError')
+        } else {
+            alert('Error');
+        }
+    } finally {
+        alert('finally는 마지막에 반드시 실행된다.');
+    }
+
+
+    // 비동기 처리의 콜백 함수에서 발생한 예외는 바깥은 try/catch로 잡을 수 없다.
+    try {
+        setTimeout(function throwError(){
+            // try 안에 있지만 try 안에서 호출된 것이 아니다. 주체는 setTimeout 이벤트이다.
+            throw new Error('오류가 발생했습니다.'); // Uncaught Error: 오류가 발생했습니다.
+        }, 1000);
+    } catch(e) {
+        console.log('예외를 캐치함');
+    }
+
+
+    // forEach 문은 실행하는 도중에 취소할 수 없지만 예외 메커니즘을 이용하면 실행중인 반복문에서 빠져나올 수 있다.
+    var a = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9];
+    try {
+        a.forEach(function(v, i, a){
+            if(i > 5) {
+                throw false;
+            }
+            return a[i] = v * v;
+        })
+    } catch(e) {
+        if(e) throw e;
+    }
+    console.log(a); // [0, 1, 4, 9, 16, 25, 6, 7, 8, 9]
+</script>
+</body>
+</html>

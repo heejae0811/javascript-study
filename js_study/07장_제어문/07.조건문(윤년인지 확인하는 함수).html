@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>조건문, 윤년인지 확인하는 함수</title>
+    <script>
+        var year = 2022;
+        
+        function isLeapYear(year) {
+            if( (year % 400 == 0) || (year % 4 == 0) && (year % 100 != 0) ) {
+                return console.log(true);
+            }
+            return console.log(false);
+        }
+    </script>
+</head>
+<body>
+    <input type="button" value="윤년 확인하기" onclick="isLeapYear()">
+</body>
+</html>

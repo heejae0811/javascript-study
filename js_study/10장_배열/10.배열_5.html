@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>배열 - map, set</title>
+</head>
+<body>
+<script>
+    // map
+    var map = new Map();
+    console.log(map); // Map(0)
+
+    map.set('Tom', 10);
+    map.set('Huck', 20);
+    map.set('Leo', 30);
+    console.log(map); // {'Tom' => 10, 'Huck' => 20, 'Leo' => 30}
+
+    console.log(map.get('Tom')); // 10
+    console.log(map.has('Huck')); // true
+
+    console.log(map.keys()); // MapIterator {'Tom', 'Huck', 'Leo'}
+    console.log(map.values()); // MapIterator {10, 20, 30}
+
+    console.log(map.entries()); // {'Tom' => 10, 'Huck' => 20, 'Leo' => 30}
+
+    map.forEach(function(value, key, map){
+        console.log(key + '->' + value);
+    });
+    console.log(map); // Tom->10, Huck->20, Leo->30
+
+    map.delete('Tom');
+    console.log(map); // {'Huck' => 20, 'Leo' => 30}
+
+    map.clear();
+    console.log(map); // Map(0)
+
+
+    var zip = new Map([['Tom', '111-1111'], ['Huck', '222-2222']]);
+    console.log(zip); // Map(2) {'Tom' => '111-1111', 'Huck' => '222-2222'}
+
+
+    // set
+    var set = new Set();
+    console.log(set); // Set(0) {size: 0}
+
+    set.add('Tom');
+    set.add('Huck');
+    set.add('Leo');
+    console.log(set); // {'Tom', 'Huck', 'Leo'}
+
+    console.log(set.has('Tom')); // true
+
+    console.log(set.keys()); // {'Huck', 'Leo'}
+    console.log(set.values()); // {'Huck', 'Leo'}
+
+    set.forEach(function(value1, value2, map){
+        console.log(value1 + '->' +value2);
+    }); // Tom->Tom, Huck->Huck, Leo->Leo
+    
+    set.delete('Tom');
+    console.log(set); // {'Huck', 'Leo'}
+
+    set.clear();
+    console.log(set); // Set(0)
+
+
+    var zip = new Set(['111', '222']);
+    console.log(zip); // {'111', '222'}
+    console.log(zip.size); // 2
+</script>
+</body>
+</html>

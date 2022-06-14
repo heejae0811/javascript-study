@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>문자열 제어하기</title>
+</head> 
+<body>
+    <script>
+        var a = "hello";
+        var b = "world";
+        var c = 5;
+        var d = {};
+        var f = new Date();
+
+        console.log(a + b); // helloworld
+        console.log(c + d); // 5[object Object]
+        console.log("현재 시각은 " + f); // 현재 시각은 Sun Jan 16 2022 15:19:43 GMT+0900 (한국 표준시)
+
+
+        // String 객체
+        var msg = new String("Everything is practice.");
+
+        console.log(msg.length); // 23
+        console.log(msg.charAt(0)); // E, 대상 문자열의 n번째 문자
+        console.log(msg.slice(1, 5)); // very, 문자열 시작은 0
+        console.log(msg.slice(-9, -5)); // prac, 음수이면 문자열 끝이 시작위치
+        console.log(msg.split(" ")); // ['Everything', 'is', 'practice.']
+        console.log(msg.split(" ", 1)); // ['Everything', 'is']
+
+        // 래퍼 객체
+        var msg1 = "My name is HeeJae"
+        console.log(msg1); // My name is HeeJae
+
+        var msg2 = new String(msg1);
+        console.log(msg2); // String {'My name is HeeJae'}
+
+        var msg3 = msg2.valueOf(); // valueOf() 메서드는 String 객체를 문자열로 반환한다.
+        console.log(msg3); // My name is HeeJae
+    </script>
+</body>
+</html>

@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>자바스크립트 5장, 6장 퀴즈</title>
+</head>
+<body>
+    <script>
+        // 1번
+        const obj = {
+            test: 1,
+            test: 2
+        };
+        console.log(typeof obj === obj ? obj : {});
+    
+        // 2번
+        let baa = 1;
+        console.log(baa ? 1 : 2);
+    
+        // 3번
+        let boo = 1;
+        console.log(++boo); 
+        console.log(boo++);
+        console.log(--boo);
+        console.log(boo--);
+    
+        // 4번
+        // 숫자, 문자열, 배열 등 모든 값이 부정하면(!) false, 부정부정하면(!!) true
+        // 사용처: 0, null, undefined은 true도 false도 아닌 값이다. 확실하게 부정을 하고 싶은 경우, !! 처리를 한다.
+        let foo1 = new Array();
+        let foo2 = !(new Array());
+        let foo3 = !!(new Array());
+    
+        console.log("4번", foo1);
+        console.log("4번", foo2);
+        console.log("4번", foo3);
+    
+        // 5번, ... 연산자는 배열을 풀어준다.
+        var arr = [1, 2, 3, 4, 5];
+        console.log(...arr);
+    
+        // 6번, (k++)++은 오류, (k++)의 연산이 끝나지 않았기 때문에 오류가 난다.
+        var k = 1;
+        console.log("6번", k++);
+    
+        // 7번, substring(시작위치, 종료위치) 문자열 자르기
+        var a = "AbstrctClassStore";
+        var b = a.toLowerCase();
+        var c = b.substring(0, 7) + "_" + b.substring(7, 12) + "_" + b.substring(12, 18);
+        console.log("7번", c);
+    
+        // 8번, 숫자를 문자열로 만들기
+        var num = String(100);
+        console.log(num);
+        console.log(num.toString());
+        console.log(10 + '0');
+    
+        // 9번, {}는 객체여서 object로 출력된다.
+        console.log("9번", 10 + {});
+    
+        // 10번
+        var num1 = parseFloat(123456);
+        var num2 = num1.toFixed(5); // toFixed를 사용하면 문자열로 바뀐다.
+        console.log("10번", parseInt(num2));
+    
+        // 11번, window.onload, document.ready는 제이쿼리에서 사용하는 것
+    
+        // 12번, blur과 focusout의 차이
+    </script>
+</body>
+</html>

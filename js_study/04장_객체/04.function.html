@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>함수</title>
+</head> 
+<body>
+    <script>
+        // 함수 이름은 해당 함수의 기능을 이해하기 쉽게 지어야 한다.
+        function square(x) {
+            return x * x;
+        }
+
+        // 함수를 호출할 때 전달하는 값 = 인수(argument) = 3, 함수 정의문의 인수 = 인자(parameter) = x
+        console.log(square(3)); // 9
+
+        
+        // 함수는 인수를 여러 개 받을 수 있다.
+        function dist(p, q) {
+            var dx = q.x - p.y; // 4-1 = 3
+            var dy = q.y - p.x; // 5-1 = 4
+
+            return Math.sqrt(dx * dx + dy * dy); // (3*3) + (4*4) = 25
+        }
+
+        var p1 = {x: 1, y: 1};
+        var p2 = {x: 4, y: 5};
+        var d = dist(p1, p2);
+
+        console.log(d); // 5
+
+
+        // 인수를 받지 않는 함수
+        var bark = function(){
+            console.log("Bow-wow");
+        }
+
+        bark(); // Bow-wow
+        console.log(bark()); // undefined
+
+        
+        // 함수 선언문의 끌어올림
+        console.log(square1(5)); // 25
+
+        function square1(x) {
+            return x * x;
+        }
+
+
+        // 자바스크립트에서 함수는 객체이다. 
+        var sq = square1; // sq 변수에 함수 객체의 참조가 저장된다.
+
+        console.log(sq(5)); //25
+
+
+        // 인수가 원시값 일 때
+        function add1(x) {
+            return x = x + 1;
+        }
+
+        var a = 3;
+        var b = add1(a); // x값은 바뀌더라도 a값은 바뀌지 않는다.
+
+        console.log("a =" + a, "b =" + b); // a =3 b =4
+
+        // 인수가 객체일 때
+        function add2(p) {
+            p.x = p.x + 1; // 3+1 = 4
+            p.y = p.y + 1; // 4+1 = 5
+
+            return p;
+        }
+
+        var c = {x: 3, y: 4};
+        var d = add2(c);
+
+        console.log(c, d); // {x: 4, y: 5} {x: 4, y: 5}
+
+
+        // elegant way : 함수의 인수를 객체의 프로퍼티에 담아서 넘긴다.
+        var parameters = {
+            x: 0,
+            y: 0,
+            vx: 10,
+            vy: 15,
+            radius: 5
+        }
+
+        function setBallProperties(params) {
+            return parameters;
+        }
+
+        console.log(setBallProperties(parameters)); //{x: 0, y: 0, vx: 10, vy: 15, radius: 5}
+    </script>
+</body>
+</html>

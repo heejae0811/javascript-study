@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>객체</title>
+</head>
+<body>
+<script>
+    // 1. 객체 리터럴로 객체 생성하기
+    let card1 = { suit: '하트', rank: 'A'};
+
+    // 2. 생성자로 객체 생성하기
+    function Card(suit, rank) {
+        this.suit = suit;
+        this.rank = rank;
+    }
+    let card2 = new Card('하트', 'A');
+
+    // 3. Object.create로 객체 생성하기
+    let card3 = Object.create(Object.prototype, {
+        suit: {
+            value: '하트',
+            writable: true,
+            enumerable: true,
+            configurable: true
+        },
+        rank: {
+            value: 'A',
+            writable: true,
+            enumerable: true,
+            configurable: true
+        }
+    });
+
+
+    // 프로토타입
+    function F(){};
+    console.log(F.prototype); // Object, 빈 객체
+
+    // .prop 메서드(속상값을 가져오거나 추가하는 메서드)를 사용해서 프로토타입에 속성값을 추가한다.
+    F.prototype.prop = 'prototype value';
+    let obj = new F();
+    console.log(obj.prop); // prototype value
+
+    obj.prop = 'instance value';
+    console.log(obj.prop); // instance value
+    console.log(F.prototype.prop); // prototype value
+
+
+    // 생성자 안에서 메서드를 정의하는 방식의 문제점
+    function Circle1(center, radius) {
+        this.center = center;
+        this.radius = radius;
+        this.area = function(){
+            return Math.PI * this.radius * this.radius;
+        };
+    }
+    let c1 = new Circle1({x: 0, y: 0}, 2.0);
+    console.log(c1);
+
+
+    // 생성자의 프로토타입 객체에 메서드를 추가해서 메모리 낭비를 피한다.
+    function Circle2(center, radius) {
+        this.center = center;
+        this.radius = radius;
+    }
+    Circle2.prototype.area = function(){
+        return Math.PI * this.radius * this.radius;
+    };
+    let c2 = new Circle2({x: 0, y: 0}, 2.0);
+    console.log(c2);
+
+
+    // 프로토타입 상속
+    let obj1 = {};
+    console.log(obj1.__proto__);
+
+
+    // 프로토타입 체인
+    let objA = {
+        name: 'Tom',
+        sayHello: function() { console.log('Hello! ' + this.name) }
+    }
+    let objB = {
+        name: 'Huck'
+    }
+    let objC = {};
+
+    objB.__proto__ = objA; // B의 부모는 A
+    objC.__proto__ = objB; // C의 부모는 B
+    console.log(objC.sayHello()); // Hello! Huck
+
+
+    // 프로토타입 가져오기
+    function P(){}
+    let objP = new P();
+    console.log(objP.__proto__); // [[Prototype]]: Object
+    console.log(Object.getPrototypeOf(objP)); // [[Prototype]]: Object
+    // console.log(Object.setPrototypeOf(objP));
+
+
+    // 프로토타입 객체의 교체 및 constructor 프로퍼티
+    function Circle3(center, radius) {
+        this.center = center;
+        this.radius = radius;
+    }
+    Circle3.prototype = {
+        constructor: Circle3,
+        area: function() {
+            return Math.PI * this.radius * this.radius;
+        }
+    }
+    let c3 = new Circle3({x: 0, y: 0}, 2.0);
+
+    console.log(Circle3);
+    console.log(c3.constructor); // function Circle3, 위의 console.log와 동일
+    console.log(c3 instanceof Circle3); // true
+
+    console.log(c3.area()); // 12.566370614359172
+
+
+    // 프로토타입 확인
+    function Proto() {};
+    let protoObj = new Proto();
+
+    console.log(protoObj);
+
+    console.log(protoObj instanceof Proto);  // true
+    console.log(protoObj instanceof Object); // true
+    console.log(protoObj instanceof Date);   // false
+
+    console.log(Proto.prototype.isPrototypeOf(protoObj));  // true
+    console.log(Object.prototype.isPrototypeOf(protoObj)); // true
+    console.log(Date.prototype.isPrototypeOf(protoObj));   // false
+
+
+    // Object.create로 객체 생성하기
+    let person1 = {
+        name: 'Tom',
+        sayHello: function(){ console.log('Hello! ' + this.name); }
+    }
+    let person2 = Object.create(person1);
+    person2.name= 'Huck';
+    console.log(person2.sayHello()); // Hello! Huck
+
+
+    // 빈 객체
+    let blankObj1 = Object.create(null);
+    console.log(blankObj1);
+
+    let blankObj2 = Object.create(Object.prototype);
+    console.log(blankObj2);
+</script>
+</body>
+</html>

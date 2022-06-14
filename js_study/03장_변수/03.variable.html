@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>변수</title>
+</head>
+<body>
+    <script>
+        var x; // 변수 안에 값이 정의되지 않았음
+        console.log('x =', x); // x = undefined
+
+        var a = 1, b = 2, c = 3; // 오른쪽 값을 왼쪽 변수에 대입
+        console.log('a =', a, 'b =', b, 'c =', c); // a = 1 b = 2 c = 3
+
+        //console.log('y =', y); // 선언하지 않은 변수 값을 읽으려고 시도하면 참조 오류가 발생
+
+        // 변수를 선언하지 않으면 자바스크립트 엔진이 자동으로 전역 변수로 선언
+        // 변수를 선언하지 않으면 버그의 원인(유효 범위)이 될 수 있기 때문에 반드시 변수를 선언하고 사용해야 한다.
+        z = 2;
+        console.log('z =', z); // z = 2
+
+        // 변수 선언의 끌어올림(호이스팅, hoisting)
+        console.log('i =', i); // i = undefined
+        var i = 5;
+        console.log('i =', i);  // i = 5
+
+        console.log('j =', j); // j = undefined
+        var j = 1;
+        var j = 2;
+        var j = 3;
+        console.log('j =', j); // j = 3
+
+        var pi = 3.14;
+        console.log(pi); // 3.14
+        pi = '원주율';
+        console.log(pi); // 원주율
+    </script>
+</body>
+</html>

@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>반복문, for 문</title>
+    <script>
+        for(var i = 0; i < 10; i++) {
+            console.log(i);
+        }
+
+        for(var k = 1, sum = 0; k <= 10; k++) {
+            sum += k;
+            console.log(sum); // 55
+        }
+
+
+        // 초기화 식, 조건식, 반복식은 모두 생략할 수 있다. 단 세미콜론은 생략할 수 없다.
+        // 조건식을 생략하면 끝없이 반복하겠다 라는 의미이다.
+        // for(;;) {
+        //     if(confirm('종료하시겠습니까?')) {
+        //         break;
+        //     }
+        // }
+
+
+        // 배열 요소의 합계 구하기
+        function sumArray(a) {
+            var sum = 0;
+
+            // 가능은 하지만 이렇게 쓰면 안된다.
+            // for(var i = 0; i < a.length; sum += a[i]) {}
+                
+            for(var i = 0; i < a.length; i++) {
+                sum += a[i];
+            }
+            return sum;
+        }
+
+        var a = [3, 5, 1, 2, 6, 7];
+        console.log(sumArray(a)); // 24
+
+
+        // 중첩 반복문
+        var n = 10;
+
+        for(var a = 1; a <= n; a++) {
+            for(var b = 1; b <= n; b++) {
+                for(var c = 1; c <= n; c++) {
+                    if(a*a + b*b == c*c) {
+                        console.log(a + '^2 + ' + b + '^2 = ' + c + '^2');
+                    }
+                }
+            }
+        }
+
+
+        // for/in
+        var obj = {a: 1, b: 2, c: 3};
+        for(var p in obj){
+            console.log('p =', p); // p = a, p = b, p = c
+            // obj[p], 연관배열, key랑 value를 맵핑한다.
+            console.log('obj.' + p + '=' + obj[p]); // obj.a = 1, obj.b = 2, obj.c = 3
+        }
+
+
+        // 구구단 만들기
+        window.onload = function() {
+            document.getElementById('num_button').onclick = function() {
+                var num = document.getElementById('num').value;
+
+                for(i = 1; i < 10; i++) {
+                    sum = num * i;
+                    
+                    console.log(num + '*' + i + '=' + sum);
+                }
+            }
+        }
+    </script>
+</head>
+<body>
+    <h1>구구단</h1>
+    <!-- FIXME:: input number 최소값, 최대값 설정하는 법?? -->
+    <input type="number" id="num" min="1" max="100" placeholder="100 미만의 숫자를 입력하시오.">
+    <button type="button" id="num_button">클릭</button>
+</body>
+</html>

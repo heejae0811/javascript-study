@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>정규 표현식</title>
+</head>
+<body>
+<script>
+    // 패턴 매칭
+    var reg = /cat/;
+
+    console.log(reg.test('cat')); // true
+    console.log(reg.test('dog')); // false
+    console.log(reg.test('cats and dogs')); // true
+    console.log(reg.test('CAT')); // false
+    console.log(reg.test('concatenate')); // true
+
+
+    // 리터럴 문자
+    var string1 = /\./;
+    var string2 = /\+/;
+    console.log(string1.test('1.1')); // true
+    console.log(string2.test('1 + 1')); // true
+
+    var string3 = /\abcde/;
+    console.log(string3.test('bcde')); // false
+    console.log(string3.test('abcde')); // true
+    console.log('\abcd\e'); // abcde
+    console.log('\tabcd\n'); //     abcd
+
+    // \d : 1개 이상의 숫자가 나열됨
+    var reg1 = /\d+/;
+    var reg2 = new RegExp('\\d+');
+    var reg3 = new RegExp('\d+');
+
+    console.log(reg1.test('123')); // true
+    console.log(reg2.test('123')); // true
+    console.log(reg3.test('123')); // false
+
+    var reg4 = /\\/;
+    var reg5 = new RegExp('\\\\');
+    // var reg6 = new RegExp('\\'); // Uncaught SyntaxError: Invalid regular expression: /\/: \ at end of pattern
+
+    console.log(reg4.test('\\')); // true
+    console.log(reg5.test('\\')); // true
+
+
+    // 문자 클래스
+    var s1 = /[-ac]/;
+    console.log(s1.test('-')); // true
+    console.log(s1.test('a')); // true
+    console.log(s1.test('d')); // false
+
+    var dateTime = /\D\D\D\D/;
+    console.log(dateTime.test('2022')); // false
+    console.log(dateTime.test('이천이십이년')); // true
+
+    var space1 = /\s/;
+    var space2 = /\S/;
+
+    console.log(space1.test('   ')); // true
+    console.log(space1.test('I like JS')); // true
+
+    console.log(space2.test('   ')); // false
+    console.log(space2.test('I like JS')); // true
+
+
+    // 반복 패턴
+    var rep1 = /[a-z]{6,12}/;
+    console.log(rep1.test('abcdef')); // true
+    console.log(rep1.test('abc')); // false
+    console.log(rep1.test('abc123')); // false
+    console.log(rep1.test('aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa')); // true
+
+    var rep2 = /[a-z]{6,}/;
+    console.log(rep2.test('abcdef')); // true
+    console.log(rep2.test('abc')); // false
+    console.log(rep2.test('abc123')); // false
+    console.log(rep2.test('aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa')); // true
+
+    var rep3 = /[a-z]{4}\d?/;
+    console.log(rep3.test('abcd')); // true
+    console.log(rep3.test('abcd123')); // true
+    console.log(rep3.test('abc')); // false
+    console.log(rep3.test('a123')); // false
+
+    var rep5 = /[a-z]{4}\d*/;
+    console.log(rep5.test('abc')); // false
+    console.log(rep5.test('abcd')); // true
+    console.log(rep5.test('abcd1')); // true
+    console.log(rep5.test('abcd1234567890')); // true
+
+
+    // 위치 매칭
+    // JavaScript만 포함하는 문자열 검색하기
+    var only = /^JavaScript$/;
+    console.log(only.test('JavaScript is powerful.')); // false
+    console.log(only.test('I love JavaScript')); // false
+    console.log(only.test('JavaScript')); // true
+
+    var word1 = /\scat\s/;
+    console.log(word1.test('I like a cat.')); // false
+    console.log(word1.test('cat is cute.')); // false
+    console.log(word1.test('I like cat and dog.')); // true
+
+    var word2 = /\bcat\b/;
+    console.log(word1.test('I like a cat.')); // false
+    console.log(word1.test('cat is cute.')); // false
+    console.log(word1.test('I like cat and dog.')); // true
+
+
+    // 플래그
+    var i = /\bcat\b/i;
+    console.log(i.test('I like a cat.')); // true
+    console.log(i.test('I like a CAT.')); // true
+
+    var g = /cat/g;
+    console.log(i.test('I like a cat.')); // true
+    console.log(i.test('I like a CAT.')); // true
+
+    console.log('📖'.match(/[\s\S]/g)); // ['\uD83D', '\uDCD6']
+    console.log('📖'.match(/[\s\S]/ug)); // ['📖']
+
+    var y = '1 little, 2 little, 3 little indian';
+    var reg = /\d+ little/y;
+    console.log(reg.sticky); // true
+    console.log(reg.exec(y)); // 1 little
+
+    reg.lastIndex = 10;
+    console.log(reg.exec(y)); // 2 little
+
+    var reg = /(\d{3})-(\d{3})/;
+    var copy = new RegExp(reg, 'gi');
+
+
+    // 문자열
+    var url = /\b(\w+):\/{2}([\w.]+)\/(\S*)\b/;
+    var text = 'Tom의 홈페이지 URL은 http://www.example.com/tom 입니다.'
+    console.log(text.match(url)); // http://www.example.com/tom', 'http', 'www.example.com', 'tom'
+
+    console.log('1, 2, 3, 4, 5'.split(/\s*, \s*/)); //  ['1', '2', '3', '4', '5']
+    console.log('1, 2, 3, 4, 5'.split(/\s*, \s*/, 3)); // ['1', '2', '3']
+
+
+    // RegExp 메서드
+    var tel = /(\d{2,5})-(\d{1,4})-(\d{4})/;
+    var text = 'Tom: 010-1234-5678';
+    var result = tel.exec(text);
+    console.log(result); // '010-1234-5678', '010', '1234', '5678'
+
+    var rep1 = /[a-z]{6, 12}/;
+    console.log(rep1.test('abcdef')); // false
+
+    var tel = /(\d{2,5})-(\d{1,4})-(\d{4})/g;
+    var text = 'Tom: 010-1234-5678\nHuck: 020-2222-2222\nBecky: 030-3333-3333';
+    console.log(tel.lastIndex); // 0
+    console.log(tel.exec(text)); // '010-1234-5678', '010', '1234', '5678'
+    console.log(tel.lastIndex); // 18
+    console.log(tel.exec(text)); // 020-2222-2222', '020', '2222', '2222'
+
+    var tel = /(\d{2,5})-(\d{1,4})-(\d{4})/g;
+    var text = 'Tom: 010-1234-5678\nHuck: 020-2222-2222\nBecky: 030-3333-3333';
+    while( (result = tel.exec(text)) != null ) {
+        console.log(result[0], result[1], result[2], result[3]);
+    }
+    // 010-1234-5678 010 1234 5678
+    // 020-2222-2222 020 2222 2222
+    // 030-3333-3333 030 3333 3333
+
+    tel.lastIndex = 0;
+    console.log(tel.exec(text)); // 010-1234-5678', '010', '1234', '5678
+</script>
+</body>
+</html>

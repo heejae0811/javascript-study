@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>조건문, switch 문</title>
+    <script>
+        // 파라미터 초기화 operator = '+'
+        function binaryOperation(a, b, operator = '+') {
+            switch(operator) {
+                case '+': return a + b;
+                case '-': return a - b;
+                case '*': return a * b;
+                case '/': return a / b;
+                case '%': return a % b;
+                case '^': return Math.pow(a, b); // Math.pow()는 2^3일 때 2에 3을 제곱한 값을 반환한다.
+                default: return NaN;
+            }
+        }
+
+        console.log(binaryOperation(2, 3, '+')); // 5
+        console.log(binaryOperation(2, 3, '-')); // -1
+        console.log(binaryOperation(2, 3, '*')); // 6
+        console.log(binaryOperation(2, 3, '/')); // 0.6666
+        console.log(binaryOperation(2, 3, '%')); // 2
+        console.log(binaryOperation(2, 3, '^')); // 8
+        console.log(binaryOperation(2, 3)); // NaN
+        console.log(binaryOperation()); // NaN
+
+        // return 값을 작성하지 않으면 값이 출력되지 않는다.(undefined)
+        // 조건과 상관없이 오퍼레이터를 먼저 찾은 후, 그 밑으로 순차적 실행을 한다.
+        function binaryOperation1(a, b, operator = '+') {
+            switch(operator) {
+                case '+': a + b;
+                case '-': return a - b;
+                case '*': a * b;
+                case '/': return a / b;
+                case '%': a % b;
+                case '^': Math.pow(a, b);
+                default: NaN;
+            }
+        }
+
+        // 0.6666, case * 부터 순차적으로 실행되고 a/b에 return 값이 있어서 2*3=6 이 아니라 0.666 출력 
+        console.log(binaryOperation1(2, 3, '*'));
+
+
+        window.onload = function() {
+            document.getElementById('num_button').onclick = function() {
+                var num = document.getElementById('num').value;
+
+                switch(num % 2) {
+                    case 0 :
+                        return document.getElementById('num_result').innerHTML = '짝수입니다.';
+                        break;
+                    case 1 :
+                        return document.getElementById('num_result').innerHTML = '홀수입니다.';
+                        break;
+                    default : 
+                        return document.getElementById('num_result').innerHTML = '숫자를 입력해주세요.';
+                }
+            }
+        }
+    </script>
+</head>
+<body>
+    <input type="number" id="num" placeholder="숫자를 입력해주세요.">
+    <button type="button" id="num_button">클릭</button>
+    <p id="num_result"></p>
+</body>
+</html>

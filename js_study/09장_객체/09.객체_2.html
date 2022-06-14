@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>객체</title>
+</head>
+<body>
+<script>
+    // 게터함수, 세터함수
+    let person = {
+        _name: 'Tom',
+        get name() {
+            return this._name;
+        },
+        set name(value) {
+            let str = value.charAt(0).toUpperCase() + value.substring(1);
+            this._name = str;
+        }
+    };
+    console.log(person.name); // Tom
+    console.log(person.age); // undefined
+
+    person.name = 'huck';
+    person.age = '20';
+    console.log(person.name); // Huck
+    console.log(person.age); // 20
+
+    delete person.age;
+    console.log(person.age); // undefined
+
+
+    // 데이터의 캡슐화
+    let person1 = (function(){
+        let _name = 'Tom';
+        return {
+            get name(){
+                return _name;
+            },
+            set name(value){
+                let str = value.charAt(0).toUpperCase() + value.substring(1);
+                _name = str;
+            }
+        };
+    })();
+    console.log(person1.name); // Tom
+    person1.name = 'huck';
+    console.log(person1.name); // Huck
+
+
+    // getOwnPropertyDescriptor
+    let tom = { name: 'Tom' };
+    console.log(Object.getOwnPropertyDescriptor(tom, 'name')); // {value: 'Tom', writable: true, enumerable: true, configurable: true}
+
+    let obj = {};
+    Object.defineProperty(obj, 'name', {
+        value: 'tom',
+        writable: true,
+        enumerable: false,
+        configurable: true
+    });
+    console.log(Object.getOwnPropertyDescriptor(obj, 'name')); // {value: 'tom', writable: true, enumerable: false, configurable: true}
+
+
+    // defineProperty
+    let people = {
+        name: 'Tom',
+        age: '20',
+        sayHello: function() { console.log('Hello! ' + this.name); }
+    };
+
+    Object.defineProperty(people, 'name', {
+        writable: false
+    });
+    people.name = 'Huck';
+    console.log(people.name); // Tom, writable: false 이기 때문에 name이 그대로 Tom
+
+    Object.defineProperty(people, 'sayHello', {
+        enumerable: false
+    });
+    for(let p in people) console.log(p); // name, age, enumerable: false이기 때문에 sayHello 속성이 나타나지 않는다.
+
+    Object.defineProperty(people, 'age', {
+        configurable: false
+    });
+    delete people.age;
+    console.log(people.age); // 20, configurable: false이기 때문에 속성의 재정의 되지 않아 age 삭제가 안된다.
+
+
+    // defineProperties
+    let people1 = Object.defineProperties({}, {
+        _name: {
+            value: 'Tom',
+            writable: true,
+            enumerable: true,
+            configurable: true
+        },
+        name: {
+            get: function() { return this._name; },
+            set: function(value) {
+                let str = value.charAt(0).toUpperCase() + value.substring(1);
+                this._name = str;
+            },
+            enumerable: true,
+            configurable: true
+        }
+    });
+    console.log(Object.getOwnPropertyDescriptor(people1, 'name')); // {enumerable: true, configurable: true, get: ƒ, set: ƒ}
+
+
+    // Object.create
+    let group = {
+        groupName: 'Tennis circle',
+        sayGroupName: function() { console.log('belong to ' + this.groupName); }
+    };
+
+    let member = Object.create(group, {
+        name: {
+            value: 'Tom',
+            writable: true,
+            enumerable: true,
+            configurable: true
+        },
+        age: {
+            value: '18',
+            writable: true,
+            enumerable: true,
+            configurable: true
+        },
+        sayName: {
+            value: function() { console.log('I am ' + this.name) },
+            writable: true,
+            enumerable: false,
+            configurable: true
+        }
+    });
+
+    console.log(member); // {name: 'Tom', age: '18', sayName: ƒ}
+    console.log(member.groupName); // Tennis circle
+    console.log(member.sayGroupName()); // belong to Tennis circle
+    console.log(member.sayName()); // I am Tom
+</script>
+</body>
+</html>

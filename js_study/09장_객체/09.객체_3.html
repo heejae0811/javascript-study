@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>객체</title>
+</head>
+<body>
+<script>
+    // 프로퍼티 확인하기
+    let id1 = { name : 'heejae' };
+    let id2 = Object.create(id1);
+
+    console.log('name' in id1); // true
+    console.log('age' in id1); // false
+    console.log('toString' in id1); // true, id는 toString(문자열 반환)을 상속받았음
+
+    console.log(id1.hasOwnProperty('name')); // true
+    console.log(id1.hasOwnProperty('toString')); // false
+
+    id2.name = 'LeeHeeJae';
+    console.log(id2.propertyIsEnumerable('name')); // true
+    console.log(id2.propertyIsEnumerable('age')); // false
+    console.log(id2.propertyIsEnumerable('toString')); // false
+
+
+    // 프로퍼티 열거
+    let person1 = { name: 'Tom', age: '17' };
+    let person2 = Object.create(person1);
+
+    person2.name = 'Huck';
+    for(let p in person2) console.log(p); // name, age
+
+    let arr = [0, 2, 4, 6, 8];
+    arr.name = 'even';
+    for(let i in arr) console.log(i); // 0, 1, 2, 3, 4, name
+
+    person2.sayHello = function() { console.log('Hello! ' + this.name + '. Age is ' + this.age); };
+    console.log(person2.sayHello()); // Hello! Huck. Age is 17
+    console.log(Object.keys(person2)); // ['name', 'sayHello'] ???
+
+    Object.defineProperty(person2, 'sayHello', {
+        enumerable: false
+    });
+    console.log(Object.keys(person2)); // ['name']
+
+    console.log(Object.getOwnPropertyNames(person1)); // ['name', 'age']
+    console.log(Object.getOwnPropertyNames(person2)); // ['name', 'sayHello'] ???
+
+
+    // 객체 잠그기
+    let name1 = { name: 'HeeJae' };
+    Object.preventExtensions(name1);
+
+    delete name1.name;
+    name1.age = 28;
+    console.log('name' in name1); // false, name 삭제 O
+    console.log('age' in name1); // false, age 추가 X
+    console.log(Object.isExtensible(name1)); // false, isExtensible 메서드는 객체가 확장 가능한지 확인한다.
+
+
+    let name2 = { name: 'HeeJae' };
+    Object.seal(name2);
+
+    delete name2.name;
+    name2.age = 28;
+    console.log('name' in name2); // true, name 삭제 X
+    console.log('age' in name2); // false, age 추가 X
+
+    name2.name = 'LeeHeeJae';
+    console.log(name2); // {name: 'LeeHeeJae'}
+    console.log(Object.isSealed(name2)); // true, isSealed 메서드는 밀봉된 상태인지 확인한다.
+
+
+    let name3 = { name: 'HeeJae' };
+    Object.freeze(name3);
+
+    delete name3.name;
+    name3.age = 28;
+    console.log('name' in name3); // true, name 삭제 X
+    console.log('age' in name3); // false, age 추가 X
+
+    name3.name = 'LeeHeeJae';
+    console.log(name3); // {name: 'HeeJae'}, 쓰기 X
+    console.log(Object.isFrozen(name3)); // true, isSealed 메서드는 밀봉된 상태인지 확인한다.
+</script>
+</body>
+</html>

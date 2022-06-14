@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>배열 - 다차원 배열</title>
+</head>
+<body>
+<script>
+    // 다차원 배열
+    var x = new Array(3);
+    for(var i = 0; i < 3; i++){
+        x[i] = new Array(3);
+    }
+    for(var count = 1, i = 0; i < 3; i++){
+        for(var j = 0; j < 3; j++){
+            x[i][j] = count++;
+        }
+    }
+    console.log(x);
+
+
+    // 유사 배열 객체
+    var a = {};
+    for(i = 0; i < 10; i++) {
+        a[i] = i
+    }
+    console.log(a); // {0: 0, 1: 1, 2: 2, 3: 3, 4: 4, 5: 5, 6: 6, 7: 7, 8: 8, 9: 9}
+    
+    a.length = 10;
+    for(i = 0, sum = 0; i < a.length; i++) {
+        sum += a[i];
+    }
+    console.log(sum); // 45
+
+
+    var map = new Map();
+    console.log(map); // Map(0) {size: 0}
+
+    var set = new Set();
+    console.log(set); // Set(0) {size: 0}
+</script>
+</body>
+</html>

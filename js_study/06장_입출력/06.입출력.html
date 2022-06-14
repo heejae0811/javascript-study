@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>웹 브라우저에서의 입출력</title>
+</head>
+<body>
+    <script>
+        // // 1. alert, 경고 대화상자
+        // alert("경고 대화상자 입니다.");
+
+        // // 2. prompt, 입력 대화상자
+        // prompt("입력 대화상자 입니다.");
+        // var name = prompt("이름을 입력하세요!");
+
+        // // 3. confirm, 확인 대화상자
+        // confirm("확인 대화상자 입니다.");
+        // var check = confirm("확인해주세요!");
+
+
+        // console
+        var a = [2, 4, 6];
+        var b = {x: 1, y: 2};
+
+        console.log("배열", a, "의 길이는", a.length, "입니다."); // 배열 (3) [2, 4, 6] 의 길이는 3 입니다.
+        console.dir(a); // Array(3)
+        console.dir(b); // Object
+
+        console.time("answer_time");
+        //alert("확인 버튼을 누르시오."); // alert 버튼을 누를 때까지의 실행 시간을 측정
+        console.timeEnd("answer_time"); // answer_time: 4508.507080078125 ms
+
+
+        // 1. HTML 요소의 속성에 이벤트 처리기 등록하기
+        function displayTime(){
+            var d = new Date();
+            console.log("현재 시각은 ", d, " 입니다."); // 현재 시각은  Mon Jan 17 2022 23:53:06 GMT+0900 (한국 표준시) 입니다.
+        }
+
+        window.onload = function(){
+            var button = document.getElementById("button");
+
+            button.onclick = displayTime;
+
+            console.log(button.onkeydown);
+        }
+
+        
+        // 타이머
+        setTimeout(function(){
+            console.log("2초가 지난 뒤에 콘솔에 찍힌다.");
+        }, 2000);
+
+        setInterval(function(){
+            console.log("10초마다 콘솔에 찍힌다.");
+        }, 10000);
+    </script>
+
+    <input type="button" value="click" onclick="displayTime()">
+    <input type="button" value="double click" ondblclick="displayTime()">
+
+    <input type="button" value="DOM click" id="button">
+</body>
+</html>

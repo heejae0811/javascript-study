@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>조건문, 고혈압 여부 확인하기</title>
+    <script>
+        window.onload = function() {
+            document.getElementById('button').onclick = function() {
+                var hp = parseFloat(document.getElementById('highpressure').value);
+                var lp = parseFloat(document.getElementById('lowpressure').value);
+                var judgement = document.getElementById('judgement');
+
+                if( hp < 120 && lp < 80) {
+                    judgement.innerHTML = '당신의 혈압은 정상입니다.'
+                } else if( hp < 139 && lp < 89 ) {
+                    judgement.innerHTML = '당신의 혈압은 다소 높습니다.'
+                } else if ( !hp || !lp ) { // FIXME:: hp == '', hp == null 은 왜 안되나요??
+                    judgement.innerHTML = '혈압을 입력해주세요.'
+                } else {
+                    judgement.innerHTML = '당신은 고혈압입니다.'
+                }
+            }
+        }
+    </script>
+</head>
+<body>
+    <p>최고 혈압: <input type="number" id="highpressure"></p>
+    <p>최저 혈압: <input type="number" id="lowpressure"></p>
+    <p id="judgement">이곳에 결과가 나타납니다.</p>
+    <input type="button" id="button" value="확인하기">
+</body>
+</html>

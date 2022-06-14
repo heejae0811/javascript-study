@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>반복문, while 문</title>
+    <script>
+        // TODO:: 재귀함수, while 문을 사용하지 않고 팩토리얼 만들기
+        // 정수 n의 팩토리얼을 구하는 함수
+        function fact(n) {
+            var k = 1;
+            var i = 1;
+
+            while(i < n) {
+                k *= ++i; // k = k * ++i
+                console.log('i = ', i, 'k = ', k);
+            }
+            return k;
+        }
+        console.log(fact(5)); // 120
+
+
+        // linearSearch와 binarySearch는 데이터베이스에서 사용하는 검색 방법
+        // 배열이 정렬된 상태에서만 사용할 수 있다. 정렬 비용이 큰지, 검색 비용이 큰지 비교해야 한다.
+
+        // 순차 검색, 왼쪽 요소부터 차례대로 x 값과 비교해서 같은 값을 가진 요소를 찾아낸다.
+        function linearSearch(x, a) {
+            var i = 0;
+            var n = a.length; // a 배열의 길이 6
+
+            while(i < n && x > a[i]) {
+                i++;
+            }
+
+            if(x == a[i]){
+                return i;
+            }
+            return null;
+        }
+        
+        var a = [2, 4, 7, 12, 15, 21]; 
+        console.log(linearSearch(15, a)); // 4
+        console.log(linearSearch(100, a)); // null
+
+        // 이진 검색
+        function binarySearch(x, a) {
+            var n = a.length; // 9
+            var left = 0;
+            var right = n-1;
+
+            while(left < right) {
+                var middle = Math.floor((left + right) / 2); // Math.floor 함수는 주어진 숫자와 같거나 작은 정수 중에서 큰 수를 반환한다. ex. 45.555 -> 45, -45.555 -> -46
+                console.log('mid', middle);
+
+                if(x <= a[middle]) {
+                    right = middle;
+                } else {
+                    left = middle + 1;
+                }
+            }
+
+            if(x == a[right]) {
+                return right;
+            }
+            return null;
+        }
+
+        var a = [2, 4, 7, 12, 15, 21, 34, 35, 46];
+        console.log(binarySearch(35, a)); // 7
+
+
+        // 정수 n의 팩토리얼 구하는 함수
+        function fact(n) {
+            var k = 1;
+            var i = n;
+
+            do {
+                k *= i--;
+            } while(i > 0);
+            
+            return k;
+        }
+        console.log(fact(5)); // 120
+
+
+        // 뉴턴-랩슨 법으로 제곱근 구하기
+        var EPSILON = 1.0e-10;
+        var d, xnew, xold;
+        var a = parseFloat(prompt('정수를 입력하시오.'));
+        xold = (a > 1)? a : 1.0;
+
+        do {
+            xnew = xold = (xold*xold - a)/(2.0 + xold);
+            d = (xold - xnew)/xold;
+            xold = xnew;
+        } while (d > EPSILON);
+
+        document.write('sqrt(', a, ') =', xnew);
+
+        
+        // window.onload: html 요소가 다 완료됐다.
+        window.onload = function() {
+            document.getElementById('num_button').onclick = function() {
+                var count = 0;
+                var sum = 0;
+                var num = parseInt(document.getElementById('num').value);
+
+                while(count <= num) {
+                    sum += count;
+                    count++;
+
+                    console.log('sum1', sum);
+                }
+                console.log('sum2', sum);
+                return sum;
+
+                // return이 실행되는 순간 함수가 완전히 끝나기 때문에 return 밑에 콘솔을 찍으면 영원히 실행되지 않는다.
+                console.log('sum3', sum);
+            } 
+        }
+    </script>
+</head>
+<body>
+    <input type="number" id="num" placeholder="숫자를 입력하시오.">
+    <button type="button" id="num_button">클릭</button>
+    <p>해당 숫자까지의 합은 <span class="num_result"></span>입니다.</p>
+</body>
+</html>

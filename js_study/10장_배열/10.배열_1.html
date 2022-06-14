@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>배열 - 메서드</title>
+</head>
+<body>
+<script>
+    // 수정 메서드
+    var arr = ['A', 'B', 'C'];
+    arr.push('D');
+    arr.push('E', 'F');
+    console.log(arr); // ['A', 'B', 'C', 'D', 'E', 'F']
+
+    arr.pop();
+    console.log(arr); // ['A', 'B', 'C', 'D', 'E']
+
+    arr.shift();
+    console.log(arr); // ['B', 'C', 'D', 'E']
+
+    arr.unshift('X');
+    console.log(arr); // ['X', 'B', 'C', 'D', 'E']
+
+    // 수정하기 시작할 위치, 삭제할 요소의 개수, 삽입할 요소
+    arr.splice(1, 4, '2', '1', '3');
+    console.log(arr); // ['X', '2', '1', '3']
+
+    arr.sort();
+    console.log(arr); // ['1', '2', '3', 'X']
+    
+    arr.sort(
+        function(a, b) {
+            return b - a;
+        }
+    );
+    console.log(arr); // ['3', '2', '1', 'X']
+
+
+    // 접근자 메서드
+    var arr1 = [1, 2, 3, 3];
+    var join_arr = arr1.join('-');
+    console.log(join_arr); // 1-2-3-3
+
+    var concat_arr = arr1.concat([4, 5]);
+    console.log(concat_arr); // [1, 2, 3, 3, 4, 5]
+
+    var slice_arr = arr1.slice(1, 3);
+    console.log(slice_arr); // [2, 3]
+    
+    console.log(arr1.indexOf(10)); // -1, 찾지 못했을 때 -1 반환
+    console.log(arr1.indexOf(3, 3)); // 3
+    console.log(arr1.indexOf(3)); // 2
+    console.log(arr1.lastIndexOf(3)); // 3
+
+    console.log([new Date()].toString()); // Wed Mar 16 2022 00:00:10 GMT+0900 (한국 표준시)
+    console.log([new Date()].toLocaleString()); // 2022. 3. 16. 오전 12:00:10
+    
+
+    // 반복 메서드
+    var sum = 0;
+    var arr2 = [1, 2, 3, 4, 5];
+    var sum_arr = arr2.forEach(function(value){
+        sum = sum + value;
+    });
+    console.log(sum); // 15
+
+    arr2.forEach(function(v, i, a){
+        a[i] = v * v;
+    });
+    console.log(arr2); // [1, 4, 9, 16, 25]
+
+
+    var map_arr = arr2.map(function(x){
+        return x * 2;
+    });
+    console.log(map_arr); // [2, 8, 18, 32, 50]
+
+    var people = [
+        { name: 'Tome', age: 10 },
+        { name: 'Huck', age: 20 },
+        { name: 'Becky', age: 30}
+    ];
+    var names = people.map(person => person.name);
+    var ages = people.map(person => person.age);
+
+    console.log(names); // ['Tome', 'Huck', 'Becky']
+    console.log(ages); // [10, 20, 30]
+
+
+    var sum = arr2.reduce(function(a, x){
+        return a += x;
+    });
+    console.log(sum); // 55
+</script>
+</body>
+</html>

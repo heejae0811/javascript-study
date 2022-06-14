@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>스톱워치</title>
+    <script>
+        window.onload = function(){
+            var startButton = document.getElementById('start');
+            var stopButton = document.getElementById('stop');
+            var display = document.getElementById('display');
+            var startTime;
+            var timer;
+
+            // start, stop 함수 실행
+            startButton.onclick = start;
+            stopButton.onclick = stop;
+
+            function start(){ 
+                startButton.onclick = null;
+                
+                startTime = new Date();
+                timer = setInterval(function(){
+                    var now = new Date();
+
+                    display.innerHTML = ((now - startTime)/1000).toFixed(2); // toFixed 메서드는 숫자를 고정 소수점 표기법으로 표기해 반환한다.
+                }, 10); // 0.01초마다 함수를 실행해서 now - startTime 값을 구한다.
+            }
+
+            function stop(){
+                clearInterval(timer);
+                startButton.onclick = start;
+            }
+        }
+    </script>
+</head>
+<body>
+    <p id="display">0.00</p>
+    <input type="button" id="start" value="start">
+    <input type="button" id="stop" value="stop">
+</body>
+</html>

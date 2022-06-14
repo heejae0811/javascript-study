@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>심벌</title>
+</head>
+<body>
+    <script>
+        var sym1 = Symbol();
+        var sym2 = Symbol();
+        console.log(sym1 == sym2); // false
+
+        var HEART = Symbol('하트');
+        console.log(HEART.toString()); // Symbol(하트)
+
+        var NONE = Symbol('none');
+        var BLACK = Symbol('black');
+        var WHITE = Symbol('white');
+        //console.log(NONE, BLACK, WHITE);
+        //console.log(NONE.toString(), BLACK.toString(), WHITE.toString());
+
+        var sym3 = Symbol.for('club');
+        var sym4 = Symbol.for('club');
+        console.log(sym3 == sym4); // true
+
+        var sym5 = Symbol.for('club');
+        var sym6 = Symbol('club');
+        console.log(Symbol.keyFor(sym5)); // club
+        console.log(Symbol.keyFor(sym6)); // undefined
+
+
+        var t1 = `I'm going to learn 
+        JavaScript`;
+        console.log('t1: ', t1); // 템플릿 리터럴에서 줄 바꿈 가능
+
+        var t2 = `I'm going to learn \n JavaScript`;
+        console.log('t2: ', t2); // 템플릿 리터럴에서 이스케이프 시퀀스 사용 가능
+
+        var t3 = String.raw`I'm going to learn \n JavaScript`;
+        console.log('t3: ', t3); // String.raw를 사용하면 이스케이프 시퀀스 문자까지 그대로 출력
+
+
+        var a = 2, b = 3;
+        console.log(`${a} + ${b} = ${a+b}`); // 2 + 3 = 5
+
+        var now = new Date();
+        console.log(`오늘은 ${now.getMonth() + 1}월 ${now.getDate()}일 입니다.`); // 오늘은 12월 27일 입니다.
+    </script>
+</body>
+</html>

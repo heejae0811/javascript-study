@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>함수</title>
+</head>
+<body>
+    <script>
+        // 1. 함수 선언문
+        // 함수 선언문으로 정의한 함수는 호출문이 그 앞에 위치해도 호출할 수 있다.(호이스팅)
+        console.log(square1(1)); // 1
+        function square1(x) {
+            return x * x;
+        }
+
+        // 2. 함수 리터럴
+        // 함수 리터럴로 정의한 함수는 변수에 할당한 후 호출할 수 있다.
+        var square2 = function(x) {
+            return x * x;
+        }
+        console.log(square2(2)); // 4
+
+        // 3. Function 생성자
+        // Function 생성자로 정의한 함수는 변수에 할당한 후 호출할 수 있다.
+        var square3 = new Function('x', 'return x*x');
+        console.log(square3(3)); // 9
+
+        // 4. 화살표 함수
+        // 화살표 함수로 정의한 함수는 변수에 할당한 후 호출할 수 있다.
+        var square4 = x => x * x;
+        console.log(square4(4)); // 16
+
+
+        // 중첩 함수
+        function norm(x) {
+            var sum2 = sumSquare();
+
+            return Math.sqrt(sum2);
+
+            function sumSquare() {
+                var sum = 0;
+
+                for(i = 0; i < x.length; i++) {
+                    sum += x[i] * x[i];
+                }
+                return sum;
+            }
+        }
+
+        var a = [2, 1, 3, 5, 7];
+        var n = norm(a);
+
+        console.log(n); // 9.38083151964686
+
+
+        // 인수
+        function f(x, y) {
+            console.log('x=' + x + 'y=' + y); // x=2 y=undefined
+        }
+        f(2);
+
+        function multiply(a, b) {
+            b = b || 1; // ||(논리합 연산자) true이면 왼쪽 피연산자 반환, false이면 오른쪽 피연산자 반환
+            return a * b;
+        }
+        console.log(multiply(2, 3)); // 6
+        console.log(multiply(2)); // 2
+
+
+        // Arguments 객체
+        function arg(x, y) {
+            arguments[1] = 3;
+            console.log('x=' + x + 'y=' + y); // x=1 y=3
+        }
+        arg(1, 2);
+
+
+        // 재귀 함수로 팩토리얼 구하기
+        function fact(n) {
+            if(n <= 1) {
+                return 1;
+            }
+            return n * fact(n-1);
+        }
+        console.log(fact(5)); // 120
+
+        // fact를 함수 리터럴로 정의
+        // arguments.callee를 사용하면 이름이 없는 익명 함수도 재귀 호출을 할 수 있다.
+        // arguments.callee가 지금 실행 중인 함수를 가리킨다.
+        var fact = function(n) {
+            if(n <= 1) return 1;
+            return n * arguments.callee(n-1);
+        }
+
+        // 하노이의 탑
+        function hanoi(n, a, b, c) {
+            if(n < 1) { return; }
+
+            hanoi(n-1, a, c, b);
+
+            console.log(n + '번째 원판' + a + '->' + c);
+
+            hanoi(n-1, b, a, c);
+        }
+        hanoi(4, 'A', 'B', 'C');
+    </script>
+</body>
+</html>

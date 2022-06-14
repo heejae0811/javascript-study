@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>정규 표현식</title>
+</head>
+<body>
+<script>
+    // search 메서드
+    var s = '1 little,2 little indian';
+    console.log(s.search(/little/)); // 2
+    console.log(s.search(/\d/)); // 0
+    console.log(s.search(/\bindian/)); /// 18
+    console.log(s.search(/3\s/)); // -1
+
+    console.log(s.replace(/indian/, 'boy')); // 1 little,2 little boy
+    console.log(s.replace(/little/, 'big')); // 1 big,2 little indian
+    console.log(s.replace(/little/, 'middle')); // 1 middle,2 little indian
+    console.log(s.replace(/little/g, 'small')); // 1 small,2 small indian
+
+    var num = '010-1111-2222';
+    var result1 = num.replace(/0(\d{1,4}-\d{1,4}-\d{4})/g, '+82-$1');
+    console.log(result1); // +82-10-1111-2222
+
+    var date = '2022년3월30일';
+    var result2 = date.replace(/(\d+)년(\d+)월(\d+)일/, '$1/$2/$3');
+    console.log(result2); // 2022/3/30
+
+    var address = '111-222 서울시 마포구';
+    var result3 = address.replace(/\d{3}-\d{3}/, '우편번호 $&');
+    console.log(result3); // 우편번호 111-222 서울시 마포구
+
+    console.log(s.match(/\d+/g)); // ['1', '2']
+
+    console.log('111.222.333'.split('.')); // ['111', '222', '333']
+    console.log('1, 2, 3, 4, 5'.split(/\s*, \s*, 3/)); // ['1, 2, 3, 4, 5']
+
+    var names = ' Tom Sawyer ; Huckleberry Finn ;Becky Thatcher ';
+    var list = names.replace(/(^\s*|\s*$)/g, '').split(/\s*;\s*/);
+    console.log(list); // ['Tom Sawyer', 'Huckleberry Finn', 'Becky Thatcher']
+</script>
+</body>
+</html>

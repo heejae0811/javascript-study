@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>객체 생성자</title>
+</head> 
+<body>
+    <script>
+        function Card(suit, rank) {
+            this.suit = suit;
+            this.rank = rank;
+        }
+        
+        // new 연산자 , Card 생성자, 생성자임을 알리기 위해 파스칼 표기법 사용
+        // 생성자를 사용하면 이름은 같지만 프로퍼티 값이 다른 객체(인스턴스)를 여러개 생성할 수 있다.
+        var card1 = new Card("하트", "A");
+        var card2 = new Card("클럽", "K");
+        var card3 = new Card("스페이드", "2");
+
+        console.log(card1); // Card {suit: '하트', rank: 'A'}
+
+
+        function Partical(x, y, vx, vy) {
+            this.x = x;
+            this.y = y;
+            this.vx = vx;
+            this.vy = vy;
+            this.velocity = Math.sqrt(vx * vx + vy * vy); // 3*3 + 4*4 = 25
+        }
+
+        var p = new Partical(0, 0, 3, 4); // Partical {x: 0, y: 0, vx: 3, vy: 4, velocity: 5}
+
+        console.log(p);
+
+
+        function Circle(center, radius) {
+            this.center = center;
+            this.radius = radius;
+            // 메서드 함수
+            this.area = function() {
+                return Math.PI * this.radius * this.radius;
+            }
+        }
+
+        var p = {x: 0, y: 0};
+        var c = new Circle(p, 2);
+
+        console.log("넓이 = " + c.area()); // 넓이 = 12.566370614359172
+
+
+        // Date 생성자
+        var now = new Date();
+        console.log(now); // Tue Jan 11 2022 23:54:36 GMT+0900 (한국 표준시)
+
+        var then = new Date(2008, 5, 10);
+        console.log(then); // Tue Jun 10 2008 00:00:00 GMT+0900 (한국 표준시)
+
+        var elapsed = now - then;
+        console.log(elapsed); // 428889411236
+
+        console.log(now.getFullYear()); // 2022
+        console.log(now.getMonth()); // 0, 0부터 시작하므로 1월을 뜻함
+        console.log(now.getDate()); // 11
+        console.log(now.getDay()); // 2, 요일을 뜻하는 숫자, 일요일이 0 이므로 2는 화요일
+        console.log(now.getHours()); // 23
+        console.log(now.getMinutes()); // 58
+        console.log(now.getSeconds()); // 56
+        console.log(now.getMilliseconds()); // 56
+        console.log(now.toString()); // Wed Jan 12 2022 00:02:23 GMT+0900 (한국 표준시)
+        console.log(now.toLocaleString()); // 2022. 1. 12. 오전 12:02:23
+        console.log(now.toLocaleDateString()); // 2022. 1. 12.
+        console.log(now.toLocaleTimeString()); // 오전 12:02:23
+        console.log(now.getUTCHours()); // 15, 협정 세계 시
+        console.log(now.toUTCString()); // Tue, 11 Jan 2022 15:02:23 GMT
+
+
+        // function 생성자
+        var square = new Function("x", "return x * x");
+        console.log(square);
+
+
+        // 전역객체, 클라이언트 측 자바스크립트에서는 window 객체가 전역 객체입니다.
+        console.dir(window);
+    </script>
+</body>
+</html>

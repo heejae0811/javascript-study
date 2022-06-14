@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>배열 - 비구조화 할당</title>
+</head>
+<body>
+<script>
+    // 배열의 비구조화 할당
+    var [a, b] = [1, 2];
+    console.log(a); // 1, var a=1
+    console.log(b); // 2, var b=2
+
+    var [a, b, c] = [2*a, 2*b];
+    console.log(a); // 2, 2*1
+    console.log(b); // 4, 2*2
+    console.log(c); // undefined
+
+    var [, x, , y, z, ... rest] = [1, 2, 3, 4, 5, 6, 7, 8, 9];
+    console.log(x); // 2
+    console.log(y); // 4
+    console.log(z); // 5
+    console.log(rest); // [6, 7, 8, 9]
+
+    var [i=0, j=1, k=2] = [1, 2];
+    console.log(i); // 1
+    console.log(j); // 2
+    console.log(k); // 2
+
+    function rotation(x, y, theta) {
+        var s = Math.sin(theta);
+        var c = Math.cos(theta);
+
+        return [c*x - s*y, s*x + c*y];
+    }
+    var [a, b] = rotation(1, 2, Math.PI/3);
+    console.log(a); // -1.2320508075688772
+    console.log(b); // 1.8660254037844388
+
+
+    // 객체의 비구조화 할당
+    var {a: x, b: y} = {a: 1, b: 2};
+    console.log(x); // 1
+    console.log(y); // 2
+    
+    var {a: x, b: y, c: z} = {a: y, b: x};
+    console.log(x); // 2
+    console.log(y); // 1
+    console.log(z); // undefined
+
+    var {a: x=1, b: y=2, c: z=3} = {a: 2, b: 4};
+    console.log(x); // 2
+    console.log(y); // 4
+    console.log(z); // 3
+
+    var {a: x, b: {c: y, d: z}} = {a: 10, b: {c: 20, d: 30}};
+    console.log(x); // 10
+    console.log(y); // 20
+    console.log(z); // 30
+
+    var person = {name: 'Tom', age: 17, hobby: ['Tennis', 'Music']};
+    console.log(person.name); // Tom
+    console.log(person.age); // 17
+    console.log(person.hobby); // ['Tennis', 'Music']
+
+
+    // 전개 연산자
+    var a = ['A', 'B', 'C'];
+    a.push(...['D', 'E']);
+    console.log(a); //  ['A', 'B', 'C', 'D', 'E']
+
+    // 전개 연산자 사용 X
+    var b = ['A', 'B', 'C'];
+    b.push(['D', 'E']);
+    console.log(b); // ['A', 'B', 'C', Array(2)]
+
+    var c = [5, 2, 3, 7, 1];
+    console.log(Math.max(c)); // NaN
+    console.log(Math.max(...c)); // 7
+</script>
+</body>
+</html>
